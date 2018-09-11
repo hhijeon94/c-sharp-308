@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ArrayList al = new ArrayList();
+            ADD_CARD card;
+            string yesno;
+
+
+            while (true)
+            {
+                card = new ADD_CARD();
+                Console.Write("이름 : ");
+                card.Name = Console.ReadLine();
+                Console.Write("나이 : ");
+                card.Age = Int32.Parse(Console.ReadLine());
+                Console.Write("학교 : ");
+                card.Highschool = Console.ReadLine();
+
+                al.Add(card);
+                
+                Console.Write("계속 입력(y), 중지(n) : ");
+                yesno = Console.ReadLine();
+                if (yesno == "n") break;
+            }
+            foreach(ADD_CARD ob in al)
+            {
+                Console.Write("이름 : {0}", ob.Name);
+                Console.Write("나이 : {0}", ob.Age);
+                Console.WriteLine("학교 : {0}", ob.Highschool);
+            }
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class ADD_CARD
+    {
+        private string name, highschool;
+        private int age;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public int Age
+        {
+            get { return age; }
+            set { age = value; }
+        }
+        public string Highschool
+        {
+            get { return highschool; }
+            set { highschool = value; }
+        }
+    }
+}
