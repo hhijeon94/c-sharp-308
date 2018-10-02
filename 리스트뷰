@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.List;
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.LargeIcon;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.SmallIcon;
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            listView1.View = View.Details;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listView1.Sorting = SortOrder.Ascending;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ListViewItem item = new ListViewItem(textBox1.Text, int.Parse(textBox5.Text));
+            item.SubItems.Add(textBox2.Text);
+            item.SubItems.Add(textBox3.Text);
+            item.SubItems.Add(textBox4.Text);
+            item.SubItems.Add(textBox5.Text);
+            listView1.Items.Add(item);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem i in listView1.SelectedItems)
+                listView1.Items.Remove(i);
+        }
+    }
+}
+--------------------------------------------------------------------------------
+이미지 다르게 들어가는거 
