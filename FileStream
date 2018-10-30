@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            FileInfo s_file = new FileInfo(args[0]);
+            FileStream file = new FileStream(args[0],FileMode.Open,FileAccess.Read);
+            StreamReader r = new StreamReader(file);
+            char c;
+            int ccnt=0,lcnt=0;
+
+            while (true)
+            {
+                if (r.Peek() > -1) // r은 streamReader    Peek 메소드는 파일의 끝이면 -1을 반환
+                {
+                    c = (char)r.Read();
+                    ccnt++;
+                    if (c == '\r')
+                    {
+                        lcnt++;
+                    }
+                }
+                else
+                    break;
+                Console.Write(c); 
+            }
+            Console.WriteLine();
+            Console.WriteLine("폴더이름 : {0}", s_file.DirectoryName.ToString());
+            Console.WriteLine("파일이름 : {0}", s_file.Name.ToString());
+            Console.WriteLine("확장자 : {0}", s_file.Extension.ToString());
+            Console.WriteLine("생성일 : {0}", s_file.CreationTime.ToString());
+            Console.WriteLine("파일크기 : {0}", s_file.Length.ToString());
+            Console.WriteLine("파일속성 : {0}", s_file.Attributes.ToString());
+            Console.WriteLine("문자카운터 : {0}", ccnt);
+            Console.WriteLine("라인카운터 : {0}", lcnt);
+
+        }
+    }
+}
