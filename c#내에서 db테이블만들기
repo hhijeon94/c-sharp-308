@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp6
+{
+    public partial class Form1 : Form
+    {
+        DataTable mytable;
+        public Form1()
+        {
+            InitializeComponent();
+
+            try
+            {
+                mytable = new DataTable("address");
+                DataColumn column;
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = "Name";
+                column.AllowDBNull = false;
+                mytable.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.Int32");
+                column.ColumnName = "Age";
+                column.AllowDBNull = false;
+                mytable.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = "Phone";
+                column.AllowDBNull = false;
+                mytable.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = "Sex";
+                column.AllowDBNull = false;
+                mytable.Columns.Add(column);
+
+                dataGridView1.DataSource = mytable;
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataRow row;
+            row = mytable.NewRow();
+            row["Name"] = textBox1.Text;
+            row["Age"] = Int32.Parse(textBox2.Text);
+            row["Phone"] = textBox3.Text;
+            row["Sex"] = textBox4.Text;
+            mytable.Rows.Add(row);
+            dataGridView1.DataSource = mytable;
+        }
+    }
+}
