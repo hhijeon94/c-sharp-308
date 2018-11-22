@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp7
+{
+    public partial class Form1 : Form
+    {
+        int mode;
+        Point startP;
+        Point tempP;
+        SolidBrush br1; //지울브러시
+        SolidBrush br2; //그릴 브러시
+        public Form1()
+        {
+            InitializeComponent();
+            mode = 1;
+            br1 = new SolidBrush(this.BackColor);
+            br2 = new SolidBrush(Color.Black);
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void 사각형ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mode = 1;
+        }
+
+        private void 원ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mode = 2;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point nowPoint = new Point(e.X, e.Y); // 현재 마우스의 위치
+                Rectangle Rect1, Rect2;
+                Graphics g = this.CreateGraphics();
+                // Rect1은 지울 도형의 영역(바로 전에 그렸던 영역),
+                // Rect2는 새롭게 그릴 도형의 영역
+                Rect1 = new Rectangle(startP.X, startP.Y,
+                tempP.X - startP.X, tempP.Y - startP.Y);
+                Rect2 = new Rectangle(startP.X, startP.Y,
+                nowPoint.X - startP.X, nowPoint.Y - startP.Y);
+
+                switch (mode)
+                {
+                    case 1: //사각형 그리기
+                        g.FillRectangle(br1, Rect1);// 이전 사각형 지우기
+                        g.FillRectangle(br2, Rect2); // 새로운 사각형을 그리기
+                        tempP = nowPoint; // 사각형의 끝 점의 임시 위치 변경
+                        break;
+                    case 2: // 원그리기
+                        g.FillEllipse(br1, Rect1);// 이전 원 지우기
+                        g.FillEllipse(br2, Rect2); // 새로운 원을 그리기
+                        tempP = nowPoint; // 원의 끝 점의 임시 위치 변경
+                        break;
+
+
+
+                }
+            }
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            Point nowPoint = new Point(e.X, e.Y); // 현재 마우스의 위치
+            startP = nowPoint; // 선의 시작점의 위치를 설정
+            tempP = nowPoint; // 바로 전에 그렸던 선의 끝점의 위치를 초기화
+
+            
+        }
+
+        private void 컬러대화상자ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            br2 = new SolidBrush(colorDialog1.Color);
+        }
+    }
+}
